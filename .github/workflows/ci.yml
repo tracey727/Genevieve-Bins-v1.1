@@ -1,0 +1,22 @@
+name: CLEAN-SAFE CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: GENEVIEVE_CLEAN_SAFE_PROTOTYPE_V1/genevieve-clean-safe-prototype
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: GENEVIEVE_CLEAN_SAFE_PROTOTYPE_V1/genevieve-clean-safe-prototype/package-lock.json
+      - run: npm ci
+      - run: npm run build
